@@ -1,0 +1,7 @@
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US:en'
+export LC_ALL='en_US.UTF-8'
+export VNC_BLACKLIST_THRESHOLD=20
+export VNC_BLACKLIST_TIMEOUT=0
+export VNC_COL_DEPTH=24
+export VNC_RESOLUTION=1024x768

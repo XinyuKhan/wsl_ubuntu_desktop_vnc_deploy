@@ -1,0 +1,27 @@
+#!/bin/bash
+for arg do
+  shift
+  case $arg in
+    # Xvnc doesn't support vtxx argument. So we convert to ttyxx instead
+    vt*)
+      set -- "$@" "${arg//vt/tty}"
+      ;;
+    # -keeptty is not supported at all by Xvnc
+    -keeptty)
+      ;;
+    # -novtswitch is not supported at all by Xvnc
+    -novtswitch)
+      ;;
+    # other arguments are kept intact
+    *)
+      set -- "$@" "$arg"
+      ;;
+  esac
+done
+
+# Here you can change or add options to fit your needs
+command=("/usr/bin/Xvnc" "-geometry" "1024x768" "-PasswordFile" "${HOME:-/root}/.vnc/passwd" "$@") 
+
+systemd-cat -t /usr/bin/Xorg echo "Starting Xvnc:" "${command[@]}"
+
+exec "${command[@]}"
